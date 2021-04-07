@@ -3,6 +3,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:login_signuup_screens/SignupScreen.dart';
+import 'SignupScreen.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -37,6 +39,9 @@ class LoginScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left:18.0,right: 18),
               child: TextField(
+                style: TextStyle(
+                    fontWeight: FontWeight.bold
+                ),
                 decoration: InputDecoration(
                   labelText: "Email Id",
                   border: OutlineInputBorder(
@@ -51,11 +56,17 @@ class LoginScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left:18.0,right: 18),
               child: TextField(
+                style: TextStyle(
+                  fontWeight: FontWeight.bold
+                ),
                 obscureText: true,
                 decoration: InputDecoration(
+                  
+
                     labelText: "Password",
-                    border: OutlineInputBorder(
+                 border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(13),
+                      borderSide: new BorderSide(color: Colors.teal)
                     ),
                 ),
               ),
@@ -74,17 +85,25 @@ class LoginScreen extends StatelessWidget {
            height: 50,
          ),
 
-         TextButton(
-           onPressed: () {},
-
-           child: Padding(
-             padding: const EdgeInsets.symmetric(horizontal: 148,vertical: 10),
-             child: Text("Login",
-             style: TextStyle(color: Colors.white),
-             ),
+         Container(
+           decoration: BoxDecoration(
+             borderRadius: BorderRadius.circular(13),
+             gradient: LinearGradient(
+               colors: [Color(0xffff5f6d),Color(0xffff5f6d),Color(0xffffc371)],
+             )
            ),
-           style: ButtonStyle(
-             backgroundColor: MaterialStateProperty.all<Color>(Colors.lightBlueAccent),
+           child: TextButton(
+             onPressed: () {},
+
+             child: Padding(
+               padding: const EdgeInsets.symmetric(horizontal: 148,vertical: 10),
+               child: Text("Login",
+               style: TextStyle(color: Colors.white),
+               ),
+             ),
+             // style: ButtonStyle(
+             //   backgroundColor: MaterialStateProperty.all<Color>(Color(0xfff4325c)),
+             // ),
            ),
          ),
             SizedBox(
@@ -92,22 +111,30 @@ class LoginScreen extends StatelessWidget {
             ),
 
 
-            TextButton.icon(
-              onPressed: () {},
-             icon: Icon(
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(13),
+                gradient: LinearGradient(
+                  colors: [Color(0xffff5f6d),Color(0xffff5f6d),Color(0xffffc371)],
+                )
+              ),
+              child: TextButton.icon(
+                onPressed: () {},
+               icon: Icon(
 
-               Icons.motorcycle_outlined,
-               color: Colors.white,
-             ),
-             label: Padding(
-               padding: const EdgeInsets.symmetric(horizontal: 85,vertical: 10),
-               child: Text(
-                 "Connect to facebook",
-                 style: TextStyle(color: Colors.white),
+                 Icons.motorcycle_outlined,
+                 color: Colors.white,
                ),
-             ),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.lightBlueAccent),
+               label: Padding(
+                 padding: const EdgeInsets.symmetric(horizontal: 77,vertical: 10),
+                 child: Text(
+                   "Connect With facebook",
+                   style: TextStyle(color: Colors.white),
+                 ),
+               ),
+                // style: ButtonStyle(
+                //   backgroundColor: MaterialStateProperty.all<Color>(Color(0xfff4325c)),
+                // ),
               ),
             ),
             SizedBox(
@@ -119,9 +146,11 @@ class LoginScreen extends StatelessWidget {
               children: [
                 Text("I'm a new user"),
                 InkWell(
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SignupScreen()));
+                  },
                   child: Text("Sign Up",
-                  style: TextStyle(color: Colors.lightBlue,fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Color(0xfff4325c),fontWeight: FontWeight.bold),
                   ),
 
                 )
