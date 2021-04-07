@@ -3,6 +3,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:login_signuup_screens/Constants/Colors.dart';
 import 'package:login_signuup_screens/SignupScreen.dart';
 import 'SignupScreen.dart';
 
@@ -89,7 +90,7 @@ class LoginScreen extends StatelessWidget {
            decoration: BoxDecoration(
              borderRadius: BorderRadius.circular(13),
              gradient: LinearGradient(
-               colors: [Color(0xffff5f6d),Color(0xffff5f6d),Color(0xffffc371)],
+               colors: [MyAppColors.appColor,MyAppColors.appColor,Color(0xff3f3d56)],
              )
            ),
            child: TextButton(
@@ -115,7 +116,7 @@ class LoginScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(13),
                 gradient: LinearGradient(
-                  colors: [Color(0xffff5f6d),Color(0xffff5f6d),Color(0xffffc371)],
+                  colors: [MyAppColors.appColor,MyAppColors.appColor,Color(0xff3f3d56)],
                 )
               ),
               child: TextButton.icon(
@@ -126,7 +127,7 @@ class LoginScreen extends StatelessWidget {
                  color: Colors.white,
                ),
                label: Padding(
-                 padding: const EdgeInsets.symmetric(horizontal: 77,vertical: 10),
+                 padding: const EdgeInsets.symmetric(horizontal: 70,vertical: 10),
                  child: Text(
                    "Connect With facebook",
                    style: TextStyle(color: Colors.white),
