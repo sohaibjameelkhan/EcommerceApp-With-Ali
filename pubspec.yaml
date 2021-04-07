@@ -50,6 +50,8 @@ flutter:
   assets:
       - Assets/Images/OnBoardingScreen/
       - Assets/Images/SplashScreen/
+      - Assets/Images/DashboardScreen/
+      - Assets/Images/CustomerReviewScreen/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

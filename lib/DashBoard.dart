@@ -70,7 +70,7 @@ class DashBoardScreen extends StatelessWidget {
 
                   leading: CircleAvatar(
                     backgroundColor: Colors.white,
-                    child: Image.asset("Assets/Images/OnBoardingScreen/watches.png"),
+                    child: Image.asset("Assets/Images/DashboardScreen/watches.png"),
                   ),
 
                   trailing: Row(

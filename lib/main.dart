@@ -7,6 +7,7 @@ import 'Product.dart';
 import 'SignupScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'DashBoard.dart';
+import 'ReviewScreen.dart';
 void main() {
   runApp(MyApp());
 }
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      home: ReviewScreen(),
     );
   }
 }
