@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:login_signuup_screens/Constants/Colors.dart';
-import 'package:login_signuup_screens/SignupScreen.dart';
 import 'SignupScreen.dart';
 import 'Constants/Colors.dart';
 

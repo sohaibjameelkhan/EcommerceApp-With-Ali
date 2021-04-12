@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:login_signuup_screens/DashBoard.dart';
-import 'package:login_signuup_screens/OnBoardingScreen.dart';
 import 'LoginScreen.dart';
 import 'Product.dart';
 import 'SignupScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'DashBoard.dart';
 import 'ReviewScreen.dart';
+import 'ProfileScreen.dart';
+import 'OnBoardingScreen.dart';
 void main() {
   runApp(MyApp());
 }
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
         primarySwatch: Colors.blue,
       ),
-      home: ReviewScreen(),
+      home: ProfileScreen(),
     );
   }
 }

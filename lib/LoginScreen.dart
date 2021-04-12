@@ -1,10 +1,5 @@
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:login_signuup_screens/Constants/Colors.dart';
-import 'package:login_signuup_screens/SignupScreen.dart';
 import 'SignupScreen.dart';
 
 class LoginScreen extends StatelessWidget {
