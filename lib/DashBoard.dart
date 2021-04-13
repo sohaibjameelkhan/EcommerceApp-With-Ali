@@ -1,10 +1,10 @@
-
-
-
-
 import 'package:flutter/material.dart';
+import 'package:login_signuup_screens/AddProduct.dart';
 import 'package:login_signuup_screens/Constants/Colors.dart';
+import 'package:login_signuup_screens/ProfileScreen.dart';
+import 'package:login_signuup_screens/SignupScreen.dart';
 import 'Constants/Colors.dart';
+import 'SignupScreen.dart';
 
 
 class DashBoardScreen extends StatelessWidget {
@@ -15,19 +15,25 @@ class DashBoardScreen extends StatelessWidget {
         backgroundColor: MyAppColors.appColor,
         title: Text("DashBoard",style: TextStyle(color: Colors.white,),),
 
-        leading: Icon(
-          Icons.blur_on
-
+        leading: IconButton(
+          icon: Icon(Icons.blur_on,color: Colors.white,),
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
+          },
         ),
         actions: [
           Icon(
-            Icons.notifications_none
+            Icons.notifications_none,
+
           ),
 
           Padding(
             padding: const EdgeInsets.only(left:15.0,right: 15),
-            child: Icon(
-              Icons.exit_to_app_outlined,
+            child: IconButton(
+              icon: Icon(Icons.exit_to_app_outlined,color: Colors.white,),
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SignupScreen()));
+              },
             ),
           ),
         ],
@@ -77,7 +83,13 @@ class DashBoardScreen extends StatelessWidget {
 
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.edit,color: Colors.blue,),
+                      IconButton(
+                          icon: Icon(Icons.edit,color: Colors.blue,),
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => AddProduct()));
+                        },
+                      ),
+
                       Icon(Icons.delete,color: Colors.red,),
 
                     ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login_signuup_screens/Constants/Colors.dart';
+import 'package:login_signuup_screens/DashBoard.dart';
 import 'LoginScreen.dart';
+import 'DashBoard.dart';
 
 class SignupScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -125,6 +127,7 @@ class SignupScreen extends StatelessWidget {
 
                 child: TextButton(
                   onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => DashBoardScreen()));
                     if (!_formKey.currentState.validate()) {
                       return;
                     }

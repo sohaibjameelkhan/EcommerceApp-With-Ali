@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:login_signuup_screens/AddProduct.dart';
 import 'LoginScreen.dart';
 import 'Product.dart';
 import 'SignupScreen.dart';
@@ -8,6 +9,7 @@ import 'DashBoard.dart';
 import 'ReviewScreen.dart';
 import 'ProfileScreen.dart';
 import 'OnBoardingScreen.dart';
+import 'AddProduct.dart';
 void main() {
   runApp(MyApp());
 }
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
         primarySwatch: Colors.blue,
       ),
-      home: ProfileScreen(),
+      home: SplashScreen(),
     );
   }
 }

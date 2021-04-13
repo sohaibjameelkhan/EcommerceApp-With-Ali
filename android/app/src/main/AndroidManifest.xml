@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.login_signuup_screens">
    <application
-        android:label="login_signuup_screens"
+        android:label="WholeFoods"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
