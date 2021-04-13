@@ -53,7 +53,7 @@ class ProductScreen extends StatelessWidget {
                         color: Colors.grey[350],
                       ),
                       child: Image.asset(
-                        "Assets/Images/OnBoardingScreen/watches.png",
+                        "Assets/Images/DashboardScreen/watches.png",
                         height: 100,
                         fit: BoxFit.cover,
                       ),
@@ -91,6 +91,7 @@ class ProductScreen extends StatelessWidget {
                   ],
                 ),
               );
-            }));
+            }),
+    );
   }
 }
