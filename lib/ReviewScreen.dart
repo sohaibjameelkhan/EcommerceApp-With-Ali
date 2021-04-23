@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_signuup_screens/UserDashBoard.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 
@@ -11,7 +12,12 @@ import 'Constants/Colors.dart';
 class ReviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+   return WillPopScope(
+      onWillPop: () {
+        return Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => UserDashBoard()));
+      },
+    child: Scaffold(
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: MyAppColors.appColor,
@@ -96,6 +102,7 @@ class ReviewScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ),
+   );
   }
 }

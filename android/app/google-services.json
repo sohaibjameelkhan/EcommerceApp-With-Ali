@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "581784558088",
+    "project_id": "wholefoods-790f4",
+    "storage_bucket": "wholefoods-790f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581784558088:android:ee78e1b67b7a0ea16a8fbd",
+        "android_client_info": {
+          "package_name": "com.example.login_signuup_screens"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "581784558088-4h2e2ahq2o36ef9vuj5en3c748melv39.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjJE7b98_pVTaMqu3SzqKhn74TpQoW4eg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "581784558088-4h2e2ahq2o36ef9vuj5en3c748melv39.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,7 +5,12 @@ import 'package:login_signuup_screens/DashBoard.dart';
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+  return  WillPopScope(
+        onWillPop: () {
+          return Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => DashBoardScreen()));
+        },
+    child: Scaffold(
       appBar: AppBar(
         title: Text("Edit Profile",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
@@ -14,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back,color: Colors.white,),
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => DashBoardScreen()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashBoardScreen()));
           },
         ),
         actions: [
@@ -118,6 +123,7 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ),
+  );
   }
 }

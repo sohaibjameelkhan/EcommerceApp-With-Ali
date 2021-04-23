@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:login_signuup_screens/AddProduct.dart';
+import 'package:login_signuup_screens/Location.dart';
+import 'package:login_signuup_screens/ProductDetailScreen.dart';
 import 'package:login_signuup_screens/UserDashBoard.dart';
 import 'LoginScreen.dart';
 import 'Product.dart';
@@ -12,7 +14,12 @@ import 'ProfileScreen.dart';
 import 'OnBoardingScreen.dart';
 import 'AddProduct.dart';
 import 'UserDashBoard.dart';
-void main() {
+import 'UserCart.dart';
+import 'ProductDetailScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -26,7 +33,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
         primarySwatch: Colors.blue,
       ),
-      home: UserDashBoard(),
+      home: UserDashBoard (),
     );
   }
 }
@@ -69,4 +76,5 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
+
 }

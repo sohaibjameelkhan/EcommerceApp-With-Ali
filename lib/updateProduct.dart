@@ -5,23 +5,32 @@ import 'package:login_signuup_screens/DashBoard.dart';
 import 'UserDashBoard.dart';
 import 'helper.dart';
 
-class AddProduct extends StatefulWidget {
-  final bool isUpdateMode;
-  final QueryDocumentSnapshot snapshot;
+class UpdateProduct extends StatefulWidget {
+  final String productID;
+  final String productName;
+  final String productPrice;
+  final String productDescription;
 
-  AddProduct({this.isUpdateMode, this.snapshot});
+  UpdateProduct({this.productID,this.productName, this.productDescription, this.productPrice});
+  
+  
+
 
   @override
-  _AddProductState createState() => _AddProductState();
+  _UpdateProductState createState() => _UpdateProductState();
 }
 
-class _AddProductState extends State<AddProduct> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _priceController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
+class _UpdateProductState extends State<UpdateProduct> {
+  TextEditingController _nameController;
+  TextEditingController _priceController;
+  TextEditingController _descriptionController;
 
   @override
   void initState() {
+    ///We have to populate our text editing controllers with speicifid product details
+    _nameController = TextEditingController(text: widget.productName);
+    _priceController = TextEditingController(text: widget.productPrice);
+    _descriptionController = TextEditingController(text: widget.productDescription);
     super.initState();
   }
 
@@ -79,7 +88,7 @@ class _AddProductState extends State<AddProduct> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: TextFormField(
                   controller: _nameController,
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -92,7 +101,7 @@ class _AddProductState extends State<AddProduct> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                 child: TextFormField(
                   controller: _priceController,
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -105,7 +114,7 @@ class _AddProductState extends State<AddProduct> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: TextFormField(
                   controller: _descriptionController,
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -130,13 +139,12 @@ class _AddProductState extends State<AddProduct> {
                       )),
                   child: TextButton(
                     onPressed: () {
-                      FirebaseFirestore.instance.collection('productData').add({
+                      ///We have to pass product id to the update product function
+                      FirebaseFirestore.instance.collection('productData').doc(widget.productID).update({
                         'productName': _nameController.text,
                         'productPrice': _priceController.text,
                         'productDescription': _descriptionController.text,
-                        'uid': getUserID()
-
-                      }).whenComplete(() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>DashBoardScreen())));
+                      });
                     },
 
                     child: Padding(
