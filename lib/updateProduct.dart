@@ -12,9 +12,6 @@ class UpdateProduct extends StatefulWidget {
   final String productDescription;
 
   UpdateProduct({this.productID,this.productName, this.productDescription, this.productPrice});
-  
-  
-
 
   @override
   _UpdateProductState createState() => _UpdateProductState();
@@ -144,7 +141,7 @@ class _UpdateProductState extends State<UpdateProduct> {
                         'productName': _nameController.text,
                         'productPrice': _priceController.text,
                         'productDescription': _descriptionController.text,
-                      });
+                      }).whenComplete(() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>DashBoardScreen())) );
                     },
 
                     child: Padding(

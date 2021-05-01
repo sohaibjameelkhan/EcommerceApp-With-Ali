@@ -259,7 +259,7 @@ class _UserDashBoardState extends State<UserDashBoard> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ReviewScreen()));
+                              builder: (context) => ReviewScreen(snapshot.data.docs[i].id,double.parse(snapshot.data.docs[i].data()['avgRating'].toString()) )));
                     },
                     child: Card(
                       elevation: 6,
