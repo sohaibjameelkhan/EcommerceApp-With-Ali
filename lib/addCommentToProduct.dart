@@ -62,7 +62,7 @@ class _AddReviewState extends State<AddReview> {
                 rating: rating
             ).toJson()]),
             'avgRating': 0.0
-          },
+          },//
 //
          );
         }, child: Text("Post Review for product"),)
