@@ -21,25 +21,25 @@ class UserDashBoard extends StatefulWidget {
 class _UserDashBoardState extends State<UserDashBoard> {
   int _currentIndex = 0;
   int _counter = 0;
-  List<DocumentSnapshot> myProducts = [];
+  // List<DocumentSnapshot> myProducts = [];
 
   ///function definition
-  getProducts() {
-    FirebaseFirestore.instance
-        .collection('productData')
-        .where('uid', isEqualTo: getUserID())
-        .get()
-        .then((value) => value.docs.map((product) {
-              myProducts.add(product);
-              setState(() {});
-            }).toList());
-  }
-
-  @override
-  void initState() {
-    getProducts();
-    super.initState();
-  }
+  // getProducts() {
+  //   FirebaseFirestore.instance
+  //       .collection('productData')
+  //       .where('uid', isEqualTo: getUserID())
+  //       .get()
+  //       .then((value) => value.docs.map((product) {
+  //             myProducts.add(product);
+  //             setState(() {});
+  //           }).toList());
+  // }
+  //
+  // @override
+  // void initState() {
+  //   getProducts();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -248,7 +248,7 @@ class _UserDashBoardState extends State<UserDashBoard> {
         return Container(
           height: 300,
           child: GridView.builder(
-              itemCount: myProducts.length,
+              itemCount:snapshot.data.docs.length,
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 300,
               ),
@@ -282,15 +282,18 @@ class _UserDashBoardState extends State<UserDashBoard> {
                               ],
                             ),
                             Container(
+                              height: 90,
+                              width: 200,
                               decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.grey[350],
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        snapshot.data.docs[i].data()['productImageUrl']
+                                    )
+                                ),
+
+
                               ),
-                              child: Image.asset(
-                                "Assets/Images/DashboardScreen/watches.png",
-                                height: 70,
-                                fit: BoxFit.cover,
-                              ),
+
                             ),
                             SizedBox(
                               height: 10,

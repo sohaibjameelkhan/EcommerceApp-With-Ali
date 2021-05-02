@@ -122,6 +122,7 @@ class DashBoardScreen extends StatelessWidget {
                                           MaterialPageRoute(
                                               builder: (context) => UpdateProduct(
                                                   productID: snapshot.data.docs[i].id,
+
                                                 productName: snapshot.data.docs[i].data()['productName'],
                                                 productDescription: snapshot.data.docs[i].data()['productDescription'],
                                                 productPrice: snapshot.data.docs[i].data()['productPrice'],

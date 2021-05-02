@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      home: UserDashBoard(),
     );
   }
 }

@@ -5,7 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:login_signuup_screens/DashBoard.dart';
 import 'UserDashBoard.dart';
 import 'helper.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class AddProduct extends StatefulWidget {
   final bool isUpdateMode;
@@ -22,14 +23,8 @@ class _AddProductState extends State<AddProduct> {
   TextEditingController _priceController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
 
-  File _image;
-  Future getImage() async{
-    final image= await ImagePicker.pickImage(source: ImageSource.gallery);
+  File _file;
 
-    setState(() {
-      _image =image;
-    });
-  }
 
 
   @override
@@ -63,36 +58,44 @@ class _AddProductState extends State<AddProduct> {
                 padding: const EdgeInsets.only(top: 0, bottom: 30),
                 child: Stack(
                   children: [
+                  Container(
+                  height: 120,
+                  width: 120,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: _file == null
+                              ? AssetImage("Assets/Images/CustomerReviewScreen/man2.png")
+                              : FileImage(_file),
+                          fit: BoxFit.cover)),
+                ),
 
-                    CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      radius: 60,
 
-                      child: (_image != null)
-                          ? Image.file(_image)
-                          : Image.asset("Assets/Images/CustomerReviewScreen/man2.png"),
-                    ),
-                    Positioned.fill(
-                      top: -50,
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          child: IconButton(
-
-                          icon: Icon(
-                            Icons.camera_alt,
-                            size: 19,
-                          ),
-                            onPressed: getImage,
+              Positioned.fill(
+                top: -50,
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Container(
+                    height: 40,
+                    width: 40,
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.camera_alt,
+                        size: 19,
                       ),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: MyAppColors.appColor),
-                        ),
-                      ),
+                      onPressed: getFile,
                     ),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.purple,
+                    ),
+                  ),
+                ),
+              ),
+
+
+
+
                   ],
                 ),
               ),
@@ -149,14 +152,20 @@ class _AddProductState extends State<AddProduct> {
                       )),
                   child: TextButton(
                     onPressed: () {
-                      FirebaseFirestore.instance.collection('productData').add({
-                        'productName': _nameController.text,
-                        'productPrice': _priceController.text,
-                        'productDescription': _descriptionController.text,
-                        'uid': getUserID()
+    getUrl(context, file: _file).then((imgUrl) {
+      FirebaseFirestore.instance.collection('productData').add({
+        'productName': _nameController.text,
+        'productPrice': _priceController.text,
+        'productDescription': _descriptionController.text,
+        'uid': getUserID(),
+        'productImageUrl': imgUrl,
 
-                      }).whenComplete(() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>DashBoardScreen())));
+      }).whenComplete(() =>
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => DashBoardScreen())));
+    });
                     },
+
 
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -177,5 +186,35 @@ class _AddProductState extends State<AddProduct> {
         ),
       ),
     );
+  }
+  Future<String> getUrl(BuildContext context, {File file}) async {
+    String postFileUrl;
+    try {
+      Reference storageReference = FirebaseStorage.instance
+          .ref()
+          .child('backendClass/${file.path.split('/').last}');
+      UploadTask uploadTask = storageReference.putFile(file);
+
+      await uploadTask.whenComplete(() async {
+        await storageReference.getDownloadURL().then((fileURL) {
+          print("I am fileUrl $fileURL");
+          postFileUrl = fileURL;
+        });
+      });
+      return postFileUrl;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future getFile() async {
+    _file = await FilePicker.getFile();
+    setState(() {
+      if (_file != null) {
+        _file = File(_file.path);
+      } else {
+        print('No image selected.');
+      }
+    });
   }
 }
