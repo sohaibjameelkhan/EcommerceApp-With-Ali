@@ -6,6 +6,8 @@ import 'package:login_signuup_screens/Constants/Colors.dart';
 import 'SignupScreen.dart';
 import 'Constants/Colors.dart';
 import 'LoginScreen.dart';
+import 'divider.dart';
+
 
 class OnBoardingPage extends StatefulWidget {
   @override
@@ -17,7 +19,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   void _onIntroEnd(context) {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => SignupScreen()),
+      MaterialPageRoute(builder: (_) => divider()),
     );
   }
 

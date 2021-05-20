@@ -6,6 +6,7 @@ import 'package:login_signuup_screens/DashBoard.dart';
 import 'package:login_signuup_screens/Location.dart';
 import 'package:login_signuup_screens/LoginScreen.dart';
 import 'package:login_signuup_screens/ReviewScreen.dart';
+import 'package:login_signuup_screens/helper/auth_state.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'Location.dart';
@@ -42,6 +43,16 @@ class _UserDashBoardState extends State<UserDashBoard> {
   // }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    changeLoginStatus();
+    super.initState();
+  }
+
+  changeLoginStatus(){
+    UserLoginStateHandler.saveUserLoggedInSharedPreference(true);
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -75,10 +86,13 @@ class _UserDashBoardState extends State<UserDashBoard> {
                           RaisedButton(
                             child: Text("Logout"),
                             onPressed: () {
+                              UserLoginStateHandler.saveUserLoggedInSharedPreference(false);
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoginScreen()));
+                                      builder: (context) => LoginScreen())).then((value){
+
+                              });
                             },
                           ),
                         ],
@@ -245,6 +259,7 @@ class _UserDashBoardState extends State<UserDashBoard> {
       ///We have to put validation to check if our snapshot has data
       ///In other we will display circular  progress indicator
       if (snapshot.hasData) {
+
         return Container(
           height: 300,
           child: GridView.builder(
@@ -259,7 +274,7 @@ class _UserDashBoardState extends State<UserDashBoard> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ReviewScreen(snapshot.data.docs[i].id,double.parse(snapshot.data.docs[i].data()['avgRating'].toString()) )));
+                              builder: (context) => ReviewScreen(snapshot.data.docs[i].id,double.parse(snapshot.data.docs[i].data()['avgRating'].toString()), snapshot.data.docs[0].data()['feedBack'] )));
                     },
                     child: Card(
                       elevation: 6,
@@ -268,28 +283,19 @@ class _UserDashBoardState extends State<UserDashBoard> {
                         const EdgeInsets.symmetric(horizontal: 18.0),
                         child: Column(
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 4.0, left: 10),
-                                  child: Image.asset(
-                                    "Assets/Images/DashboardScreen/emptyheart.png",
-                                    height: 20,
-                                  ),
-                                ),
-                              ],
-                            ),
+
                             Container(
                               height: 90,
-                              width: 200,
+                              width: 150,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                     image: NetworkImage(
                                         snapshot.data.docs[i].data()['productImageUrl']
-                                    )
+                                    ),
+                                  fit: BoxFit.cover,
+
                                 ),
+
 
 
                               ),
@@ -307,19 +313,51 @@ class _UserDashBoardState extends State<UserDashBoard> {
                                 children: [
                                   Column(
                                     children: [
-                                      Text(snapshot.data.docs[i].data()['productName']),
-                                      Text(snapshot.data.docs[i].data()['productDescription']),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "Price: \$${snapshot.data.docs[i].data()['productPrice']}",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: MyAppColors.appColor),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left:48.0),
+                                            child: Image.asset(
+                                              "Assets/Images/DashboardScreen/emptyheart.png",
+                                              height: 20,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(right:38.0),
+                                        child: Text(snapshot.data.docs[i].data()['productName'],style: TextStyle(
+                                          fontWeight: FontWeight.bold
+                                        ),),
+                                      ),
+
                                     ],
                                   ),
-                                  Text(
-                                      "Price: \$${snapshot.data.docs[i].data()['productPrice']}",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: MyAppColors.appColor),
-                                  )
+
                                 ],
                               ),
-                            )
+                            ),
+                            Text(snapshot.data.docs[i].data()['productDescription']),
+                            Padding(
+                              padding: const EdgeInsets.only(top:4.0),
+                              child: SmoothStarRating(
+                                  allowHalfRating: false,
+
+                                  starCount: 5,
+                                  // rating: snapshot.data.docs[i].data()['avgRating'],
+                                  rating: 3.6,
+                                  size: 15.0,
+                                  isReadOnly: true,
+                                  color: Colors.green,
+                                  borderColor: Colors.green,
+                                  spacing: 0.0),
+                            ),
                           ],
                         ),
                       ),

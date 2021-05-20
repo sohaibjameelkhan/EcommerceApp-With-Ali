@@ -5,8 +5,11 @@ import 'package:login_signuup_screens/Constants/Colors.dart';
 import 'package:login_signuup_screens/ProfileScreen.dart';
 import 'package:login_signuup_screens/SignupScreen.dart';
 import 'package:login_signuup_screens/UserDashBoard.dart';
+import 'package:login_signuup_screens/diplayReviewsOnOwnerScreen.dart';
 import 'package:login_signuup_screens/updateProduct.dart';
+
 import 'Constants/Colors.dart';
+import 'diplayReviewsOnOwnerScreen.dart';
 import 'SignupScreen.dart';
 import 'helper.dart';
 
@@ -95,50 +98,73 @@ class DashBoardScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                             horizontal: 8,
                           ),
-                          child: Card(
-                            elevation: 4,
-                            child: ListTile(
-                              title: Text(
-                                  snapshot.data.docs[i].data()['productName']),
-                              subtitle: Text(
-                                  "Price: \$${snapshot.data.docs[i].data()['productPrice']}"),
-                              leading: CircleAvatar(
-                                backgroundColor: Colors.white,
-                                child: Image.asset(
-                                    "Assets/Images/DashboardScreen/watches.png"),
-                              ),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.edit,
-                                      color: Colors.blue,
-                                    ),
-                                    onPressed: () {
-                                      ///For update product we have to pass product data along with product id to update product screen
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => UpdateProduct(
-                                                  productID: snapshot.data.docs[i].id,
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pushReplacement(context,
+                                  MaterialPageRoute(builder: (context) => DisplayReviews()));
 
-                                                productName: snapshot.data.docs[i].data()['productName'],
-                                                productDescription: snapshot.data.docs[i].data()['productDescription'],
-                                                productPrice: snapshot.data.docs[i].data()['productPrice'],
-                                                  )));
-                                    },
-                                  ),
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.delete,
-                                      color: Colors.red,
+                            },
+
+
+                            child: Card(
+                              elevation: 4,
+                              child: ListTile(
+                                title: Text(
+                                    snapshot.data.docs[i].data()['productName']),
+                                subtitle: Text(
+                                    "Price: \$${snapshot.data.docs[i].data()['productPrice']}"),
+                                leading: Container(
+                                  height: 50,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+
+                                      image: NetworkImage(
+                                          snapshot.data.docs[i].data()['productImageUrl']
+                                      ),
+                                      fit: BoxFit.cover,
+
                                     ),
-                                    onPressed: () {
-                                      deleteProduct(snapshot.data.docs[i].id);
-                                    },
+
+
+
                                   ),
-                                ],
+
+                                ),
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.edit,
+                                        color: Colors.blue,
+                                      ),
+                                      onPressed: () {
+                                        ///For update product we have to pass product data along with product id to update product screen
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => UpdateProduct(
+                                                    productID: snapshot.data.docs[i].id,
+
+                                                  productName: snapshot.data.docs[i].data()['productName'],
+                                                  productDescription: snapshot.data.docs[i].data()['productDescription'],
+                                                  productPrice: snapshot.data.docs[i].data()['productPrice'],
+                                                    )));
+                                      },
+                                    ),
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                      onPressed: () {
+                                        deleteProduct(snapshot.data.docs[i].id);
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

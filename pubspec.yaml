@@ -37,6 +37,7 @@ dependencies:
   loading_overlay: ^0.3.0
   cloud_firestore: ^1.0.3
   file_picker: ^1.4.3+2
+  shared_preferences: ^2.0.5
   firebase_storage: ^8.0.1
 
 

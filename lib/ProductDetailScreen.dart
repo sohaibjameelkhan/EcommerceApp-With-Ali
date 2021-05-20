@@ -152,6 +152,7 @@ class ProductDetailScreen extends StatelessWidget {
                     ),),
                   ),
                   Padding(
+
                     padding: const EdgeInsets.only(left:20.0),
                     child: Text("4.9 vote",style: TextStyle(
                       fontWeight: FontWeight.bold,

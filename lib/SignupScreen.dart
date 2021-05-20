@@ -6,6 +6,7 @@ import 'LoginScreen.dart';
 import 'DashBoard.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'UserDashBoard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _pwdController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -63,6 +65,7 @@ class _SignupScreenState extends State<SignupScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 18.0, right: 18),
                 child: TextFormField(
+                  controller: _nameController,
 
                   validator: (val) =>
                   val.isEmpty ? "Please Write Your Name" : null,
@@ -263,7 +266,14 @@ class _SignupScreenState extends State<SignupScreen> {
       return await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
           email: _emailController.text, password: _pwdController.text)
-          .whenComplete(() => makeLoadingFalse())
+          .whenComplete(() {
+         FirebaseFirestore.instance.collection('usersData').add({
+          'UserName': _nameController.text,
+          'UserEmail': _emailController.text,
+          'UserPassword': _pwdController.text,
+        });
+        makeLoadingFalse();
+      })
           .then((value) {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserDashBoard()));
         return showDialog<void>(
